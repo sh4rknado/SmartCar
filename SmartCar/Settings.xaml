@@ -1,0 +1,98 @@
+﻿<UserControl x:Class="SmartCar.Settings"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:SmartCar" 
+             xmlns:smartcarviewmodel="clr-namespace:SmartCarViewModel;assembly=SmartCarViewModel"
+             d:DataContext="{d:DesignInstance Type=smartcarviewmodel:SmartCarSettingsViewModel}"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800" Background="White">
+    <TabControl>
+        <TabItem Header="General Settings">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="auto" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                </Grid.RowDefinitions>
+
+                <Label Content="Car IP" Grid.Row="0" Grid.Column="0" Margin="10,10,10,0" />
+                <TextBox Text="{Binding Path=SmartCarIP}" VerticalContentAlignment="Center" Grid.Row="0" Grid.Column="1" Margin="0,10,10,0" />
+
+                <Label Content="Camera IP" Grid.Row="1" Grid.Column="0" Margin="10,10,10,0" />
+                <TextBox Text="{Binding Path=SmartCarCamera}" VerticalContentAlignment="Center" Grid.Row="1" Grid.Column="1" Margin="0,10,10,0" />
+
+                <Label Content="Controller" Grid.Row="2" Grid.Column="0" Margin="10,10,10,0" />
+                <ComboBox  Grid.Row="2" Grid.Column="1" Margin="0,10,10,0" 
+                           VerticalContentAlignment="Center"
+                           ItemsSource="{Binding Path=AvailableControllers}" 
+                           SelectedItem="{Binding Path=SelectedController}"/>
+            </Grid>
+        </TabItem>
+
+        <TabItem Header="PTZ camera Settings">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="auto" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                </Grid.RowDefinitions>
+
+                <Label Content="Camera x min" Grid.Row="0" Grid.Column="0" Margin="10,10,10,0" />
+                <TextBox Text="{Binding Path=CameraXMin}" VerticalContentAlignment="Center" Grid.Row="0" Grid.Column="1" Margin="0,10,10,0" />
+
+                <Label Content="Camera x max" Grid.Row="1" Grid.Column="0" Margin="10,10,10,0" />
+                <TextBox Text="{Binding Path=CameraXMax}" VerticalContentAlignment="Center" Grid.Row="1" Grid.Column="1" Margin="0,10,10,0" />
+
+                <Label Content="Camera y min" Grid.Row="2" Grid.Column="0" Margin="10,10,10,0" />
+                <TextBox Text="{Binding Path=CameraYMin}" VerticalContentAlignment="Center" Grid.Row="2" Grid.Column="1" Margin="0,10,10,0" />
+
+                <Label Content="Camera y max" Grid.Row="3" Grid.Column="0" Margin="10,10,10,0" />
+                <TextBox Text="{Binding Path=CameraYMax}" VerticalContentAlignment="Center" Grid.Row="3" Grid.Column="1" Margin="0,10,10,0" />
+            </Grid>
+        </TabItem>
+
+        <TabItem Header="Servo Settings">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="auto" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                </Grid.RowDefinitions>
+
+                <Label Content="Servo Frequency (Hz)" Grid.Row="0" Grid.Column="0" Margin="10,10,10,0" />
+                <TextBox Text="{Binding Path=ServoFreq}" VerticalContentAlignment="Center" Grid.Row="0" Grid.Column="1" Margin="0,10,10,0" />
+
+                <Label Content="Min servo Pulse width" Grid.Row="1" Grid.Column="0" Margin="10,10,10,0" />
+                <TextBox Text="{Binding Path=ServoPwmMin}" VerticalContentAlignment="Center"  Grid.Row="1" Grid.Column="1" Margin="0,10,10,0" />
+
+                <Label Content="Max servo Pulse width" Grid.Row="2" Grid.Column="0" Margin="10,10,10,0" />
+                <TextBox Text="{Binding Path=ServoPwmMax}" VerticalContentAlignment="Center" Grid.Row="2" Grid.Column="1" Margin="0,10,10,0" />
+
+                <Label Content="Motor min speed" Grid.Row="3" Grid.Column="0" Margin="10,10,10,0" />
+                <TextBox Text="{Binding Path=MotorMin}" VerticalContentAlignment="Center"  Grid.Row="3" Grid.Column="1" Margin="0,10,10,0" />
+
+                <Label Content="Motor max speed" Grid.Row="4" Grid.Column="0" Margin="10,10,10,0" />
+                <TextBox Text="{Binding Path=MotorMax}" VerticalContentAlignment="Center" Grid.Row="4" Grid.Column="1" Margin="0,10,10,0" />
+
+            </Grid>
+        </TabItem>
+    </TabControl>
+</UserControl>
