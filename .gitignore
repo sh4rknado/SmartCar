@@ -56,3 +56,5 @@ TestResult.xml
 nunit-*.xml
 
 .venv
+
+Python/Training_ia/*.jpg
