@@ -1,6 +1,6 @@
 from transformers import ViTImageProcessor
 from PIL import Image
-from datasets import load_dataset
+from datasets import load_dataset, ClassLabel
 import torch
 import numpy as np
 from evaluate import load
@@ -16,8 +16,9 @@ def compute_metrics(p):
 
 
 def collate_fn(batch):
+    print("batch", batch[0])
     return {
-        'image': torch.stack([x['image'] for x in batch]),
+        'pixel_values': torch.stack([x['pixel_values'] for x in batch]),
         'labels': torch.tensor([x['labels'] for x in batch])
     }
 
@@ -26,12 +27,10 @@ def transform(batch):
     inputs['labels'] = batch['labels']
     return inputs
 
-ds = load_dataset('imagefolder', data_dir='C:/Users/jerem/OneDrive/Documents/SmartCar/Python/Training_ia/dataset', split='train')
-labels = ds.features['labels']
+ds = load_dataset('imagefolder', data_dir='C:/Users/jerem/OneDrive/Documents/SmartCar/Python/Training_ia/dataset')
+labels = ClassLabel(num_classes=2, names=[0, 1]).names
 
 prepared_ds = ds.with_transform(transform)
-
-labels = ds['train'].features['labels'].names
 
 model = ViTForImageClassification.from_pretrained(
     model_name_or_path,
@@ -41,9 +40,10 @@ model = ViTForImageClassification.from_pretrained(
 )
 
 training_args = TrainingArguments(
-  output_dir="./vit-base-beans",
+  output_dir="./SmartCar_ViT",
+  overwrite_output_dir=True,
   per_device_train_batch_size=16,
-  evaluation_strategy="steps",
+  eval_strategy="steps",
   num_train_epochs=4,
   fp16=True,
   save_steps=100,
@@ -53,7 +53,6 @@ training_args = TrainingArguments(
   save_total_limit=2,
   remove_unused_columns=False,
   push_to_hub=False,
-  report_to='tensorboard',
   load_best_model_at_end=True,
 )
 

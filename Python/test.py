@@ -1,7 +1,10 @@
 import socket
 import json
 
-from Protocol.ClientProtocol import Sender
+import requests
+
+from Protocol.ClientProtocol import Sender, Receiver
+
 
 def test_post_request():
     host = "10.0.0.100"
@@ -39,6 +42,9 @@ def test():
     sender.connect()
     sender.turn()
 
-        
+def test_get():
+    sender = Receiver()
+    sender.get_frame()
+    
 if __name__ == "__main__":
-    test()
+    test_get()
