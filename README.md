@@ -10,6 +10,16 @@ Full build : https://www.youtube.com/watch?v=5jaY4WWStfw&t=1752s
 
 Full build (with upgrade): https://www.youtube.com/watch?v=5jaY4WWStfw&t=1752s
 
+gear ratio explaination : https://youtu.be/xz_7wudsCxA?si=6EfOzw9CyRQAZsRG
+
+tt02 gear ratio 1 : https://youtu.be/sZeNW9iXfhA?si=DJAV-P7mNhNqOBhw
+
+tt02 gear ratio 2 (140km/h) (french speed run)
+https://youtu.be/VqwL-JDO_k4?si=ZbUx-5rV4UbFxDs0
+
+tt02 gear ratio 3: (200km/h) :
+https://youtu.be/H_VMgpEubjk?si=jDgYzwlfr2YrgA6w
+
 ### explaination about electronics 
 
 Brushless ESC : https://youtu.be/yiD5nCfmbV0?si=4gDMlUopPC1GDRFV
