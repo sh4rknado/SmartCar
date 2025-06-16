@@ -3,6 +3,7 @@
 ## Mount the car (motor and chassis)
 
 Full build : https://www.youtube.com/watch?v=5jaY4WWStfw&t=1752s
+
 Full build (with upgrade): https://www.youtube.com/watch?v=5jaY4WWStfw&t=1752s
 
 ## Mount the electronics
