@@ -1,14 +1,21 @@
 # SmartCar project
 
-## Mount the car (motor and chassis)
+
+
+## Documentation
+
+### Mount the car (motor and chassis)
 
 Full build : https://www.youtube.com/watch?v=5jaY4WWStfw&t=1752s
 
 Full build (with upgrade): https://www.youtube.com/watch?v=5jaY4WWStfw&t=1752s
 
-## Mount the electronics
+### explaination about electronics 
 
+Brushless ESC : https://youtu.be/yiD5nCfmbV0?si=4gDMlUopPC1GDRFV
 
+servo motor:
+https://youtu.be/6sWHo6GXQTc?si=A46Mng9aF-uA64HG
 
 ## Hardware part:
 | Item              | Price    | Link |
