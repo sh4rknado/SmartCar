@@ -7,7 +7,9 @@
 connectining the esc (3 wires using jumpers) to arduino using theses pins:
 
 1.VCC to 5v pin 
+
 2.ground to ground 
+
 3.PWM to D5 - GPIO14 (SCLK) 
 
 
