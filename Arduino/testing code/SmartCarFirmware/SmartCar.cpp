@@ -34,7 +34,7 @@ void SmartCar::SetAngle(float angle, int channel)
     _pwm->setPWM(channel, 0, pulselength);
 }
 
-void SmartCar::setup() {
+void SmartCar::Setup() {
   Wire.begin(D2, D1); // ESP8266 
   //   Serial.begin(9600);
   //   while (!Serial); // wait serial
@@ -75,14 +75,9 @@ void SmartCar::InitializePCA9685() {
     delay(10);
 }
 
-void loop() { 
-    Serial.println("Sending minimum throttle");
-    _pwm->writeMicroseconds(1, 1610);
-    delay(1000);
-
+void SmartCar::StopMotor() {
     Serial.println("Sending stop motor");
     _pwm->writeMicroseconds(1, 1600);
-    delay(1000);
 }
 
 void SmartCar::SetAngle(float angle, int channel) {

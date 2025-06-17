@@ -35,6 +35,7 @@ class SmartCar
         float GetDirection();
         float GetCameraX();
         float GetCameraY();
+        void StopMotor();
 }
 
 #endif
