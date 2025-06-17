@@ -62,6 +62,160 @@ connectining the esc (3 wires using jumpers) to arduino using theses pins:
     }
 
 
+### Step 2: Testing I2C with PCA9685 and ESP8266 D1 MINI
+
+A. Connect the power DC 7/11 V to LM5675
+B. Connect the external alimentation to PCA9685.
+C. Connect the 5V/ground
+D. connect the D2 to SDA and D1 to SCL
+C. Scan and try to detect the address 0x40 (I found 2 address 0x40 and 0x70)
+    
+    // --------------------------------------
+    // i2c_scanner
+    //
+    // Version 1
+    //    This program (or code that looks like it)
+    //    can be found in many places.
+    //    For example on the Arduino.cc forum.
+    //    The original author is not know.
+    // Version 2, Juni 2012, Using Arduino 1.0.1
+    //     Adapted to be as simple as possible by Arduino.cc user Krodal
+    // Version 3, Feb 26  2013
+    //    V3 by louarnold
+    // Version 4, March 3, 2013, Using Arduino 1.0.3
+    //    by Arduino.cc user Krodal.
+    //    Changes by louarnold removed.
+    //    Scanning addresses changed from 0...127 to 1...119,
+    //    according to the i2c scanner by Nick Gammon
+    //    http://www.gammon.com.au/forum/?id=10896
+    // Version 5, March 28, 2013
+    //    As version 4, but address scans now to 127.
+    //    A sensor seems to use address 120.
+    // Version 6, November 27, 2015.
+    //    Added waiting for the Leonardo serial communication.
+    // 
+    //
+    // This sketch tests the standard 7-bit addresses
+    // Devices with higher bit address might not be seen properly.
+    //
+    
+    #include <Wire.h>
+    
+    
+    void setup()
+    {
+      //ZWire.begin(); // Arduino
+      Wire.begin(D2, D1); // ESP8266
+    
+      Serial.begin(9600);
+      while (!Serial);             // Leonardo: wait for serial monitor
+      Serial.println("\nI2C Scanner");
+    }
+    
+    
+    void loop()
+    {
+      byte error, address;
+      int nDevices;
+    
+      Serial.println("Scanning...");
+    
+      nDevices = 0;
+      for(address = 1; address < 127; address++ ) 
+      {
+        // The i2c_scanner uses the return value of
+        // the Write.endTransmisstion to see if
+        // a device did acknowledge to the address.
+        Wire.beginTransmission(address);
+        error = Wire.endTransmission();
+    
+        if (error == 0)
+        {
+          Serial.print("I2C device found at address 0x");
+          if (address<16) 
+            Serial.print("0");
+          Serial.print(address,HEX);
+          Serial.println("  !");
+    
+          nDevices++;
+        }
+        else if (error==4) 
+        {
+          Serial.print("Unknown error at address 0x");
+          if (address<16) 
+            Serial.print("0");
+          Serial.println(address,HEX);
+        }    
+      }
+      if (nDevices == 0)
+        Serial.println("No I2C devices found\n");
+      else
+        Serial.println("done\n");
+    
+      delay(5000);           // wait 5 seconds for next scan
+    }
+
+
+### Step 3: Interfacing the Servo
+
+A. connect servo motor to channel 0.
+
+
+    #include <Wire.h>
+    #include <Adafruit_PWMServoDriver.h>
+    
+    Adafruit_PWMServoDriver pwm = Adafruit_PWMServoDriver();
+    
+    #define SERVOMIN  150 // This is the 'minimum' pulse length count (out of 4096)
+    #define SERVOMAX  600 // This is the 'maximum' pulse length count (out of 4096)
+    #define USMIN  600 // This is the rounded 'minimum' microsecond length based on the minimum pulse of 150
+    #define USMAX  2400 // This is the rounded 'maximum' microsecond length based on the maximum pulse of 600
+    #define SERVO_FREQ 50 // Analog servos run at ~50 Hz updates
+    
+    void setup()
+    {
+      Wire.begin(D2, D1); // ESP8266 
+      Serial.begin(9600);
+      while (!Serial); // wait serial
+      while (!CheckI2C(0x40)); // wait I2C
+      InitializePCA9685();
+    }
+    
+    bool CheckI2C(byte address) {
+        Serial.println("Scanning...");
+        Wire.beginTransmission(address);
+        byte error = Wire.endTransmission();
+        
+        if(error == 0)
+            Serial.println("I2C found at address 0x40...");
+    
+        return error == 0;
+        delay(500);
+    }
+    
+    void InitializePCA9685() {
+        pwm.begin();
+        pwm.setOscillatorFrequency(27000000);
+        pwm.setPWMFreq(SERVO_FREQ);  // Analog servos run at ~50 Hz updates
+        delay(10);
+    }
+    
+    void loop() { 
+        SetAngle(10.0, 0);
+        delay(5000);
+        SetAngle(90.0, 0);
+        delay(5000);
+        SetAngle(160.0, 0);
+        delay(5000);
+        SetAngle(90.0, 0);
+    }
+    
+    void SetAngle(float angle, int channel) {
+        float pulselength = map(angle, 0, 180, SERVOMIN, SERVOMAX);
+        pwm.setPWM(channel, 0, pulselength);
+    }
+
+
 
 
 
