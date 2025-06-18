@@ -3,22 +3,16 @@
 
 #include <Wire.h>
 #include <Adafruit_PWMServoDriver.h>
+#include "SmartCarConfig.h"
 
 class SmartCar
 {
     private:
-        const int SERVO_MIN = 150;          // This is the 'minimum' pulse length count (out of 4096) 
-        const int SERVO_MAX = 600;          // This is the 'maximum' pulse length count (out of 4096)
-        const int SERVO_FREQ = 50;          // Analog servos run at ~50 Hz updates
-        const int MIN_PULSE_LENGTH = 1000;  // Minimum pulse length in µs
-        const int MAX_PULSE_LENGTH = 2000;  // Maximum pulse length in µs
+        SmartCarConfig& _config;
         Adafruit_PWMServoDriver* _pwm;
         float _currentDirection;
         float _currentCameraX;
         float _currentCameraY;
-        int _cam_channel_x;
-        int _cam_channel_y;
-        int _direction_channel;
 
     private:
         void SetAngle(float angle, int channel);
@@ -27,7 +21,7 @@ class SmartCar
         void ArmMotor();
 
     public:
-        SmartCar SmartCar(int cam_channel_x, int  cam_channel_y, int direction_channel);
+        SmartCar SmartCar(SmartCarConfig config);
         void Setup();
         void SetDirection(float angle);
         void SetCameraX(float angle);
