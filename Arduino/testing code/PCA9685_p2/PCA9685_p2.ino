@@ -51,12 +51,12 @@ void loop() {
     delay(1000);
     SetAngle(90.0, 0);
     delay(1000);
-    SetAngle(160.0, 0);
+    SetAngle(130.0, 0);
     delay(1000);
     SetAngle(90.0, 0);
 
-    Serial.println("Sending minimum throttle - 1588");
-    pwm.writeMicroseconds(1, 1588);
+    Serial.println("Sending minimum throttle - 1589");
+    pwm.writeMicroseconds(1, 1589);
     delay(1000);
     
     Serial.println("Sending minimum throttle - 1500");

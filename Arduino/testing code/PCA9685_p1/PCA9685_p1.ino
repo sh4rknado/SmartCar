@@ -42,7 +42,7 @@ void loop() {
     delay(5000);
     SetAngle(90.0, 0);
     delay(5000);
-    SetAngle(160.0, 0);
+    SetAngle(130.0, 0);
     delay(5000);
     SetAngle(90.0, 0);
 }
