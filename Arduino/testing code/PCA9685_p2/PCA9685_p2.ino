@@ -8,8 +8,7 @@ Adafruit_PWMServoDriver pwm = Adafruit_PWMServoDriver();
 #define USMIN  600    // This is the rounded 'minimum' microsecond length based on the minimum pulse of 150
 #define USMAX  2400   // This is the rounded 'maximum' microsecond length based on the maximum pulse of 600
 #define SERVO_FREQ 50 // Analog servos run at ~50 Hz updates
-#define MIN_PULSE_LENGTH 1000 // Minimum pulse length in µs
-#define MAX_PULSE_LENGTH 2000 // Maximum pulse length in µs
+#define MOTOR_STOP_PULSE_LENGTH 1500 // Stop pulse length in µs
 
 void setup()
 {
@@ -22,15 +21,10 @@ void setup()
 }
 
 void ArmMotor() {
-    delay(5000);
     //-------------------------------------
-    Serial.println("Sending minimum throttle");
-    pwm.writeMicroseconds(1,MIN_PULSE_LENGTH);
-    delay(2500);
-    //-------------------------------------
-    Serial.println("Sending maximum throttle");
-    pwm.writeMicroseconds(1,MAX_PULSE_LENGTH);
-    //-------------------------------------
+    Serial.println("Arming the motor with MOTOR_STOP_PULSE_LENGTH ");
+    pwm.writeMicroseconds(1, MOTOR_STOP_PULSE_LENGTH);
+    delay(7000);
 }
 
 bool CheckI2C(byte address) {
@@ -61,12 +55,12 @@ void loop() {
     delay(1000);
     SetAngle(90.0, 0);
 
-    Serial.println("Sending minimum throttle");
-    pwm.writeMicroseconds(1, 1610);
+    Serial.println("Sending minimum throttle - 1588");
+    pwm.writeMicroseconds(1, 1588);
     delay(1000);
-
-    Serial.println("Sending stop motor");
-    pwm.writeMicroseconds(1, 1600);
+    
+    Serial.println("Sending minimum throttle - 1500");
+    pwm.writeMicroseconds(1, MOTOR_STOP_PULSE_LENGTH);
     delay(1000);
 }
 
